@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mbc.project.dao.MemberDao">
+
+    <!-- 마이페이지 회원정보 -->
+    <select id="getMember"
+            parameterType="String"
+            resultType="com.mbc.project.dto.MemberDto">
+
+        select id, name, discnt_time,
+               phone, email, auth, car_num, car_type
+        from member
+        where id=#{id}
+
+    </select>
+
+    <!-- 비밀번호 변경 -->
+    <update id="updatePw" parameterType="com.mbc.project.dto.MemberDto">
+
+        update member
+        set pw=#{pw}
+        where id=#{id}
+
+    </update>
+
+    <!-- 전화번호 변경 -->
+    <update id="updatePhone" parameterType="com.mbc.project.dto.MemberDto">
+
+        update member
+        set phone=#{phone}
+        where id=#{id}
+
+    </update>
+
+    <!-- 이메일 변경 -->
+    <update id="updateEmail" parameterType="com.mbc.project.dto.MemberDto">
+
+        update member
+        set email=#{email}
+        where id=#{id}
+
+    </update>
+
+    <!-- 차량번호와 전기차 여부 변경 -->
+    <update id="updateCar" parameterType="com.mbc.project.dto.MemberDto">
+
+        update member
+        set car_num=#{carNum},
+            car_type=#{carType}
+        where id=#{id}
+
+    </update>
+
+</mapper>

@@ -1,0 +1,30 @@
+=================================================
+-- parking 초기 데이터 (지하 1~3층, 층별 30자리)
+=================================================
+INSERT INTO parking (floor, total_spc, client_spc, elec_spc, dis_spc) VALUES
+(1, 30, 24, 4, 2),   -- 지하 1층
+(2, 30, 24, 4, 2),   -- 지하 2층
+(3, 30, 24, 4, 2);   -- 지하 3층
+
+=================================================
+-- space 초기 데이터 (층별 30개 자리 자동 생성)
+-- 자리번호: 지하1층 A1~A30, 지하2층 B1~B30, 지하3층 C1~C30
+-- spc_type: 0=일반, 1=전기차, 2=장애인
+-- spc_stat: 0=빈자리
+=================================================
+INSERT INTO space (spc_no, floor, spc_type, spc_stat)
+SELECT
+    CASE f.floor
+        WHEN 1 THEN 'A' || n
+        WHEN 2 THEN 'B' || n
+        WHEN 3 THEN 'C' || n
+    END,
+    f.floor,
+    CASE
+        WHEN n <= 24 THEN 0
+        WHEN n <= 28 THEN 1
+        ELSE 2
+    END,
+    0
+FROM (VALUES (1), (2), (3)) AS f(floor)
+CROSS JOIN generate_series(1, 30) AS n;

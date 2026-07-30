@@ -1,0 +1,55 @@
+-- ============================================
+-- 1. member (회원)
+-- ============================================
+CREATE TABLE member (
+    id          VARCHAR(50)  PRIMARY KEY,        -- 아이디
+    pw          VARCHAR(255) NOT NULL,           -- 패스워드
+    name        VARCHAR(50)  NOT NULL,           -- 이름
+    discnt_time  INT,                            -- 점주가 할인해줄 수 있는 시간
+    phone       VARCHAR(20)  NOT NULL,           -- 전화번호
+    email       VARCHAR(100),                    -- 이메일
+    auth        INT          NOT NULL,           -- 권한 (예: 0=사용자, 1=점주, 2=관리자)
+    car_num      VARCHAR(20)  NOT NULL,          -- 차 번호
+    car_type     INT          NOT NULL           -- 전기차 여부 (예: 0=일반, 1=전기차, 2=장애인차)
+);
+
+
+-- ============================================
+-- 2. parking (층별 주차장 정보)
+-- ============================================
+CREATE TABLE parking (
+    floor      INT PRIMARY KEY,                  -- 층수
+    total_spc   INT NOT NULL,                    -- 총 주차 공간
+    client_spc  INT NOT NULL,                    -- 고객 주차 공간
+    elec_spc    INT NOT NULL,                    -- 전기차 주차 공간
+    dis_spc     INT NOT NULL                     -- 장애인 차량 공간
+);
+
+
+-- ============================================
+-- 3. space (개별 주차 자리)
+-- ============================================
+CREATE TABLE space (
+    spc_no    VARCHAR(20) PRIMARY KEY,             -- 주차 자리 번호
+    floor    INT NOT NULL,                         -- 층수
+    spc_type  INT NOT NULL,                        -- 자리 타입 (예: 0=일반, 1=전기차, 2=장애인)
+    spc_stat  INT NOT NULL,                        -- 사용 상태 (예: 0=빈자리, 1=사용중)
+
+    FOREIGN KEY (floor) REFERENCES parking(floor)
+);
+
+
+-- ============================================
+-- 4. car (입출차 내역)
+-- ============================================
+CREATE TABLE car (
+    ent_time  TIMESTAMP DEFAULT NOW() PRIMARY KEY,  -- 입차 시간 (PK)
+    id        VARCHAR(50) NOT NULL,              -- 차주 (member.id 참조)
+    car_stat  INT NOT NULL,                       -- 상태 (예: 0=입차, 1=주차, 2=출차, 3=정산)
+    ex_time   TIMESTAMP,                          -- 출차 시간
+    cost      INT,                                 -- 요금
+    spc_no    VARCHAR(20),                         -- 주차된 자리
+
+    FOREIGN KEY (id) REFERENCES member(id),
+    FOREIGN KEY (spc_no) REFERENCES space(spc_no)
+);
