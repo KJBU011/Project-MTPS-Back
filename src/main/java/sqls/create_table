@@ -10,7 +10,7 @@ CREATE TABLE member (
     email       VARCHAR(100),                    -- 이메일
     auth        INT          NOT NULL,           -- 권한 (예: 0=사용자, 1=점주, 2=관리자)
     car_num      VARCHAR(20)  NOT NULL,          -- 차 번호
-    car_type     INT          NOT NULL           -- 전기차 여부 (예: 0=일반, 1=전기차, 2=장애인차)
+    car_type     INT          NOT NULL           -- 전기차 여부 (예: 0=일반, 1=전기차)
 );
 
 
