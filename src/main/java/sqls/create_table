@@ -49,7 +49,7 @@ CREATE TABLE car (
     ex_time   TIMESTAMP,                          -- 출차 시간
     cost      INT,                                 -- 요금
     spc_no    VARCHAR(20),                         -- 주차된 자리
-    discnt_at TIMESTAMP,                   -- 할인적용시간 (NULL이면 미적용, 값 있으면 할인 적용)  2시간 고정이니 프론트에서 '2시간'으로 표시
+    discnt_at TIMESTAMP,                   -- 할인지급시간 (NULL이면 미적용, 값 있으면 할인 적용)  2시간 고정이니 프론트에서 '2시간'으로 표시
 
     FOREIGN KEY (id) REFERENCES member(id),
     FOREIGN KEY (spc_no) REFERENCES space(spc_no)
