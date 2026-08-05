@@ -4,5 +4,67 @@
 
 <mapper namespace="com.mbc.mtps.dao.MemberDao">
 
+<!--============================== 관리자 페이지 =================================-->
+
+	<!-- 일반차량이 전기차 주차공간에 주차 했을 때 알람 -->
+	<select id="checkCarType" parameterType="String" resultType="Integer" >
+		select count(*)
+		
+		from member
+		
+		join space on car.spc_no = space.spc_no
+		
+		where member id=#{id}
+			and member.car_type = 0
+			and space.spc_type (1)
+			and car.car_stat = 1
+			and space.spc_stat = 1	
+	</select>
+
+<!--============================== 주차 안내 페이지 =================================-->
+
+	<!-- 전체 주차 현황 -->   
+	<select id="getTotalParkingCount" resultType="map">
+
+		select sum(total_spc) as total_spc,
+		(select count(*)
+			from car
+			where car_stat in (0, 1, 3)
+		) as parking_car,
+		
+		sum(total_spc) - (
+			select count(*)
+			from car
+			where car_stat in (0, 1, 3)
+		) as available_spc
+		
+		from parking	
+
+	</select>
+
+	<!-- 층별 주차현황 -->
+	<select id="getFloorCount" resultType="map">
+		select floor,
+	       		count(*) filter (where spc_type = 0 and spc_stat = 0) as normal_spc,
+				count(*) filter (where spc_type = 1 and spc_stat = 0) as elec_spc,
+				count(*) filter (where spc_type = 2 and spc_stat = 0) as dis_spc
+	
+	    from space
+	
+	    group by floor
+	
+	    order by floor asc 
+	</select>
+
+	<!-- 주차 현황 지도 -->
+	<select id="parkingMap" resultType="com.mbc.mtps.dto.SpaceDto">
+
+		select spc_no, floor, spc_type, spc_stat
+		
+		from space
+		
+		order by floor, spc_no
+
+	</select>
 
 </mapper>

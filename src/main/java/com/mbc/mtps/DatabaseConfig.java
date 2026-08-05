@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -51,6 +53,11 @@ public class DatabaseConfig {
 	@Bean
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sf) {
 		return new SqlSessionTemplate(sf);
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
 	}
 	
 }

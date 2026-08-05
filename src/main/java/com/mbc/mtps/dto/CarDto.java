@@ -5,33 +5,51 @@ import java.sql.Timestamp;
 
 public class CarDto implements Serializable{
 
-    private Timestamp ent_time;   // 입차 시간 (PK)
+    private int carId;           // 입출차 내역 PK (SERIAL)
+    private Timestamp entTime;   // 입차 시간
     private String id;           // 차주 (member.id 참조)
-    private int car_stat;         // 상태 (0=입차, 1=주차, 2=출차, 3=정산)
-    private Timestamp ex_time;    // 출차 시간
+    private int carStat;         // 상태 (0=입차, 1=주차, 2=출차, 3=정산)
+    private Timestamp exTime;    // 출차 시간
     private int cost;        // 요금
-    private String spc_no;        // 주차된 자리
+    private String spcNo;        // 주차된 자리
+    private Timestamp discntAt;	// 할인적용시간 (NULL=미적용, 값 있으면 2시간 고정 적용)
+    private String discntOwnerId;	// 할인을 부여한 점주 id
+    private String carNum;		// 차 번호
+    private int parkingMinutes;	// 현재 주차 시간(분)
 	
     public CarDto() {
-		
+	
 	}
-    
-    public CarDto(Timestamp ent_time, String id, int car_stat, Timestamp ex_time, int cost, String spc_no) {
+
+	public CarDto(int carId, Timestamp entTime, String id, int carStat, Timestamp exTime, int cost, String spcNo,
+			Timestamp discntAt, String carNum, int parkingMinutes) {
 		super();
-		this.ent_time = ent_time;
+		this.carId = carId;
+		this.entTime = entTime;
 		this.id = id;
-		this.car_stat = car_stat;
-		this.ex_time = ex_time;
+		this.carStat = carStat;
+		this.exTime = exTime;
 		this.cost = cost;
-		this.spc_no = spc_no;
+		this.spcNo = spcNo;
+		this.discntAt = discntAt;
+		this.carNum = carNum;
+		this.parkingMinutes = parkingMinutes;
 	}
 
-	public Timestamp getEnt_time() {
-		return ent_time;
+	public int getCarId() {
+		return carId;
 	}
 
-	public void setEnt_time(Timestamp ent_time) {
-		this.ent_time = ent_time;
+	public void setCarId(int carId) {
+		this.carId = carId;
+	}
+
+	public Timestamp getEntTime() {
+		return entTime;
+	}
+
+	public void setEntTime(Timestamp entTime) {
+		this.entTime = entTime;
 	}
 
 	public String getId() {
@@ -42,20 +60,20 @@ public class CarDto implements Serializable{
 		this.id = id;
 	}
 
-	public int getCar_stat() {
-		return car_stat;
+	public int getCarStat() {
+		return carStat;
 	}
 
-	public void setCar_stat(int car_stat) {
-		this.car_stat = car_stat;
+	public void setCarStat(int carStat) {
+		this.carStat = carStat;
 	}
 
-	public Timestamp getEx_time() {
-		return ex_time;
+	public Timestamp getExTime() {
+		return exTime;
 	}
 
-	public void setEx_time(Timestamp ex_time) {
-		this.ex_time = ex_time;
+	public void setExTime(Timestamp exTime) {
+		this.exTime = exTime;
 	}
 
 	public int getCost() {
@@ -66,18 +84,53 @@ public class CarDto implements Serializable{
 		this.cost = cost;
 	}
 
-	public String getSpc_no() {
-		return spc_no;
+	public String getSpcNo() {
+		return spcNo;
 	}
 
-	public void setSpc_no(String spc_no) {
-		this.spc_no = spc_no;
+	public void setSpcNo(String spcNo) {
+		this.spcNo = spcNo;
+	}
+
+	public Timestamp getDiscntAt() {
+		return discntAt;
+	}
+
+	public void setDiscntAt(Timestamp discntAt) {
+		this.discntAt = discntAt;
+	}
+
+	public String getDiscntOwnerId() {
+		return discntOwnerId;
+	}
+
+	public void setDiscntOwnerId(String discntOwnerId) {
+		this.discntOwnerId = discntOwnerId;
+	}
+
+	public String getCarNum() {
+		return carNum;
+	}
+
+	public void setCarNum(String carNum) {
+		this.carNum = carNum;
+	}
+
+	public int getParkingMinutes() {
+		return parkingMinutes;
+	}
+
+	public void setParkingMinutes(int parkingMinutes) {
+		this.parkingMinutes = parkingMinutes;
 	}
 
 	@Override
 	public String toString() {
-		return "CarDto [ent_time=" + ent_time + ", id=" + id + ", car_stat=" + car_stat + ", ex_time=" + ex_time
-				+ ", cost=" + cost + ", spc_no=" + spc_no + "]";
+		return "CarDto [carId=" + carId + ", entTime=" + entTime + ", id=" + id + ", carStat=" + carStat + ", exTime=" + exTime + ", cost="
+				+ cost + ", spcNo=" + spcNo + ", discntAt=" + discntAt + ", discntOwnerId=" + discntOwnerId
+				+ ", carNum=" + carNum + ", parkingMinutes=" + parkingMinutes + "]";
 	}
+    
+    
     
 }

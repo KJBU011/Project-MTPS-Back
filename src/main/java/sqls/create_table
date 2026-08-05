@@ -1,3 +1,5 @@
+데이터베이스명: JeolDaeParking
+
 -- ============================================
 -- 1. member (회원)
 -- ============================================
@@ -8,9 +10,9 @@ CREATE TABLE member (
     discnt_time  INT,                            -- 점주가 할인해줄 수 있는 시간
     phone       VARCHAR(20)  NOT NULL,           -- 전화번호
     email       VARCHAR(100),                    -- 이메일
-    auth        INT          NOT NULL,           -- 권한 (예: 0=사용자, 1=점주, 2=관리자)
+    auth        INT          NOT NULL,           -- 권한 (예: 1=관리자,2=점주, 3=일반회원, 0=삭제된 계정)
     car_num      VARCHAR(20)  NOT NULL,          -- 차 번호
-    car_type     INT          NOT NULL           -- 전기차 여부 (예: 0=일반, 1=전기차, 2=장애인차)
+    car_type     INT          NOT NULL           -- 전기차 여부 (예: 0=일반, 1=전기차)
 );
 
 
@@ -43,13 +45,16 @@ CREATE TABLE space (
 -- 4. car (입출차 내역)
 -- ============================================
 CREATE TABLE car (
-    ent_time  TIMESTAMP DEFAULT NOW() PRIMARY KEY,  -- 입차 시간 (PK)
+    car_id    SERIAL PRIMARY KEY,                 -- 입출차 내역 고유번호 (자동증가)
+    ent_time  TIMESTAMP DEFAULT NOW() NOT NULL,   -- 입차 시간
     id        VARCHAR(50) NOT NULL,              -- 차주 (member.id 참조)
     car_stat  INT NOT NULL,                       -- 상태 (예: 0=입차, 1=주차, 2=출차, 3=정산)
     ex_time   TIMESTAMP,                          -- 출차 시간
     cost      INT,                                 -- 요금
     spc_no    VARCHAR(20),                         -- 주차된 자리
+    discnt_at TIMESTAMP,                   -- 할인지급시간 (NULL이면 미적용, 값 있으면 할인 적용)  2시간 고정이니 프론트에서 '2시간'으로 표시
+    discnt_owner_id VARCHAR(50),            -- 할인을 부여한 점주 id (member.id 참조, discnt_at과 함께 세팅/해제)
 
-    FOREIGN KEY (id) REFERENCES member(id),
+    FOREIGN KEY (id) REFERENCES member(id) on update cascade,
     FOREIGN KEY (spc_no) REFERENCES space(spc_no)
 );

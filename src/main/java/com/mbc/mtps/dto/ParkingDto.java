@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class ParkingDto implements Serializable{
 	private int floor;       // 층수 (PK)
-    private int total_spc;    // 총 주차 공간
-    private int client_spc;   // 고객 주차 공간
-    private int elec_spc;     // 전기차 주차 공간
-    private int dis_spc;      // 장애인 차량 공간
+    private int totalSpc;    // 총 주차 공간
+    private int clientSpc;   // 고객 주차 공간
+    private int elecSpc;     // 전기차 주차 공간
+    private int disSpc;      // 장애인 차량 공간
     
     public ParkingDto() {
 	
 	}
 
-	public ParkingDto(int floor, int total_spc, int client_spc, int elec_spc, int dis_spc) {
+	public ParkingDto(int floor, int totalSpc, int clientSpc, int elecSpc, int disSpc) {
 		super();
 		this.floor = floor;
-		this.total_spc = total_spc;
-		this.client_spc = client_spc;
-		this.elec_spc = elec_spc;
-		this.dis_spc = dis_spc;
+		this.totalSpc = totalSpc;
+		this.clientSpc = clientSpc;
+		this.elecSpc = elecSpc;
+		this.disSpc = disSpc;
 	}
 
 	public int getFloor() {
@@ -30,42 +30,42 @@ public class ParkingDto implements Serializable{
 		this.floor = floor;
 	}
 
-	public int getTotal_spc() {
-		return total_spc;
+	public int getTotalSpc() {
+		return totalSpc;
 	}
 
-	public void setTotal_spc(int total_spc) {
-		this.total_spc = total_spc;
+	public void setTotalSpc(int totalSpc) {
+		this.totalSpc = totalSpc;
 	}
 
-	public int getClient_spc() {
-		return client_spc;
+	public int getClientSpc() {
+		return clientSpc;
 	}
 
-	public void setClient_spc(int client_spc) {
-		this.client_spc = client_spc;
+	public void setClientSpc(int clientSpc) {
+		this.clientSpc = clientSpc;
 	}
 
-	public int getElec_spc() {
-		return elec_spc;
+	public int getElecSpc() {
+		return elecSpc;
 	}
 
-	public void setElec_spc(int elec_spc) {
-		this.elec_spc = elec_spc;
+	public void setElecSpc(int elecSpc) {
+		this.elecSpc = elecSpc;
 	}
 
-	public int getDis_spc() {
-		return dis_spc;
+	public int getDisSpc() {
+		return disSpc;
 	}
 
-	public void setDis_spc(int dis_spc) {
-		this.dis_spc = dis_spc;
+	public void setDisSpc(int disSpc) {
+		this.disSpc = disSpc;
 	}
 
 	@Override
 	public String toString() {
-		return "ParkingDto [floor=" + floor + ", total_spc=" + total_spc + ", client_spc=" + client_spc + ", elec_spc="
-				+ elec_spc + ", dis_spc=" + dis_spc + "]";
+		return "ParkingDto [floor=" + floor + ", totalSpc=" + totalSpc + ", clientSpc=" + clientSpc + ", elecSpc="
+				+ elecSpc + ", disSpc=" + disSpc + "]";
 	}
     
 }

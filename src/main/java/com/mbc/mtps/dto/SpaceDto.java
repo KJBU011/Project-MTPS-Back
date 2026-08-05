@@ -4,29 +4,29 @@ import java.io.Serializable;
 
 public class SpaceDto implements Serializable{
 	
-	private String spc_no;   // 주차 자리 번호 (PK)
+	private String spcNo;   // 주차 자리 번호 (PK)
     private int floor;      // 층수
-    private int spc_type;    // 자리 타입 (0=일반, 1=전기차, 2=장애인)
-    private int spc_stat;    // 사용 상태 (0=빈자리, 1=사용중)
+    private int spcType;    // 자리 타입 (0=일반, 1=전기차, 2=장애인)
+    private int spcStat;    // 사용 상태 (0=빈자리, 1=사용중)
     
     public SpaceDto() {
 	
 	}
 
-	public SpaceDto(String spc_no, int floor, int spc_type, int spc_stat) {
+	public SpaceDto(String spcNo, int floor, int spcType, int spcStat) {
 		super();
-		this.spc_no = spc_no;
+		this.spcNo = spcNo;
 		this.floor = floor;
-		this.spc_type = spc_type;
-		this.spc_stat = spc_stat;
+		this.spcType = spcType;
+		this.spcStat = spcStat;
 	}
 
-	public String getSpc_no() {
-		return spc_no;
+	public String getSpcNo() {
+		return spcNo;
 	}
 
-	public void setSpc_no(String spc_no) {
-		this.spc_no = spc_no;
+	public void setSpcNo(String spcNo) {
+		this.spcNo = spcNo;
 	}
 
 	public int getFloor() {
@@ -37,25 +37,25 @@ public class SpaceDto implements Serializable{
 		this.floor = floor;
 	}
 
-	public int getSpc_type() {
-		return spc_type;
+	public int getSpcType() {
+		return spcType;
 	}
 
-	public void setSpc_type(int spc_type) {
-		this.spc_type = spc_type;
+	public void setSpcType(int spcType) {
+		this.spcType = spcType;
 	}
 
-	public int getSpc_stat() {
-		return spc_stat;
+	public int getSpcStat() {
+		return spcStat;
 	}
 
-	public void setSpc_stat(int spc_stat) {
-		this.spc_stat = spc_stat;
+	public void setSpcStat(int spcStat) {
+		this.spcStat = spcStat;
 	}
 
 	@Override
 	public String toString() {
-		return "SpaceDto [spc_no=" + spc_no + ", floor=" + floor + ", spc_type=" + spc_type + ", spc_stat=" + spc_stat
+		return "SpaceDto [spcNo=" + spcNo + ", floor=" + floor + ", spcType=" + spcType + ", spcStat=" + spcStat
 				+ "]";
 	}
     
