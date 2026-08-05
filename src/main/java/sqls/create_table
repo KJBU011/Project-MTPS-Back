@@ -53,7 +53,10 @@ CREATE TABLE car (
     cost      INT,                                 -- 요금
     spc_no    VARCHAR(20),                         -- 주차된 자리
     discnt_at TIMESTAMP,                   -- 할인지급시간 (NULL이면 미적용, 값 있으면 할인 적용)  2시간 고정이니 프론트에서 '2시간'으로 표시
+<<<<<<< HEAD
     discnt_owner_id VARCHAR(50),            -- 할인을 부여한 점주 id (member.id 참조, discnt_at과 함께 세팅/해제)
+=======
+>>>>>>> 0343d933746257cfcde3fc836abfff5f0f2aa728
 
     FOREIGN KEY (id) REFERENCES member(id) on update cascade,
     FOREIGN KEY (spc_no) REFERENCES space(spc_no)
